@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<!-- 配置了系列常量 -->
+	<constant name="struts.custom.i18n.resources" value="resource"/>
+	<constant name="struts.i18n.encoding" value="GBK"/>
+	<constant name="struts.devMode" value="true"/>
+	<package name="default" extends="struts-default">
+		<action name="loginAction" class="loginAction" method="login">
+		<result>/WEB-INF/content/index.jsp</result>
+			<result name="input">/WEB-INF/content/login.jsp</result> 
+			<result name="login">/WEB-INF/content/login.jsp</result> 
+			<result name="error">/WEB-INF/content/login.jsp</result>
+		</action>
+		<action name="uploadAction" class="uploadAction" method="upload">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/png,image/gif,image/jpeg</param>
+				
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result>/WEB-INF/content/succ.jsp</result>
+			<result name="input">/WEB-INF/content/index.jsp</result>
+		</action>
+		<action name="viewPhotos" class="viewPhotos">
+			<result>/WEB-INF/content/viewPhotos.jsp</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/{0}.jsp</result>
+		</action>
+	</package>
+</struts>
